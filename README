@@ -8,3 +8,12 @@ IMX7D CHANGED/PREPARED FEATURES
 * Added tsc2004 touchscreen 
 * Added isl1208 real time clock RTC
 
+
+----------------------------------------------------------
+27-September 2018
+
+* GPIO6_IO12 changed to GPIO2_IO30 because of SAI1_RXD conflict between TSC2004 and MTXX2GXX nand  
+* MTXX nand added to devicetree
+* TSC2004 regulator problem fixed via kernel driver 
+* TSC2004 interrupts changed for new GPIO pins
+* RTL8211 compatible added to dt 

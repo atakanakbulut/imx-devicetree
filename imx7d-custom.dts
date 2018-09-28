@@ -291,12 +291,12 @@
 		#size-cells = <0>;
 
 		ethphy0: ethernet-phy@0 {
-			compatible = "ethernet-phy-ieee802.3-c22";
+			compatible = "realtek,RTL8211E";
 			reg = <0>;
 		};
 
 		ethphy1: ethernet-phy@1 {
-			compatible = "ethernet-phy-ieee802.3-c22";
+			compatible = "realtek,RTL8211E";
 			reg = <1>;
 		};
 	};
@@ -351,9 +351,8 @@
 		reg = <0x4b>;
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_i2c1_tsc2004>;
-		interrupts-extended = <&gpio6 12 IRQ_TYPE_EDGE_RISING>;
-		wakeup-gpios = <&gpio6 12 GPIO_ACTIVE_LOW>;
-
+		interrupts-extended = <&gpio2 30 IRQ_TYPE_EDGE_FALLING>;
+		wakeup-gpios = <&gpio2 30 GPIO_ACTIVE_LOW>;
 		touchscreen-fuzz-x = <4>;
 		touchscreen-fuzz-y = <7>;
 		touchscreen-fuzz-pressure = <2>;
@@ -821,7 +820,7 @@
 &gpmi {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_gpmi_nand_1>;
-	status = "disabled";
+	status = "okay";
 	nand-on-flash-bbt;
 };
 
@@ -970,7 +969,7 @@
 
 		pinctrl_i2c1_tsc2004: i2c1tsc2004grp {
 			fsl,pins = <
-			MX7D_PAD_SAI1_RX_DATA__GPIO6_IO12	0x7d
+			MX7D_PAD_EPDC_PWR_COM__GPIO2_IO30	0x7d
 		>;
 		};
 
