@@ -1,9 +1,4 @@
 /*
- * Devicetree prepared for imx7d custom board 
- * Edited by Atakan AKBULUT 
- * akbulutatakann@gmail.com
- *	
- * 
  * Copyright (C) 2015 Freescale Semiconductor, Inc.
  *
  * This file is dual-licensed: you can use it either under the terms
@@ -44,6 +39,7 @@
  *     FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  *     OTHER DEALINGS IN THE SOFTWARE.
  */
+
 /dts-v1/;
 
 #include "imx7d.dtsi"
@@ -266,7 +262,7 @@
 	VCOM-supply = <&VCOM_reg>;
 	DISPLAY-supply = <&DISPLAY_reg>;
 	en-gpios = <&gpio1 4 GPIO_ACTIVE_HIGH>;
-	status = "okay";
+	status = "disabled";
 };
 
 &epxp {
@@ -291,12 +287,12 @@
 		#size-cells = <0>;
 
 		ethphy0: ethernet-phy@0 {
-			compatible = "realtek,RTL8211E";
+			compatible = "ethernet-phy-ieee802.3-c22";
 			reg = <0>;
 		};
 
 		ethphy1: ethernet-phy@1 {
-			compatible = "realtek,RTL8211E";
+			compatible = "ethernet-phy-ieee802.3-c22";
 			reg = <1>;
 		};
 	};
@@ -315,6 +311,7 @@
 	fsl,magic-packet;
 	status = "disabled";
 };
+
 &mipi_csi {
 	clock-frequency = <240000000>;
 	status = "okay";
@@ -341,7 +338,7 @@
 };
 
 &i2c1 {
-
+	clock-frequency = <100000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c1>;
 	status = "okay";
@@ -352,7 +349,6 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&pinctrl_i2c1_tsc2004>;
 		interrupts-extended = <&gpio2 30 IRQ_TYPE_EDGE_FALLING>;
-		wakeup-gpios = <&gpio2 30 GPIO_ACTIVE_LOW>;
 		touchscreen-fuzz-x = <4>;
 		touchscreen-fuzz-y = <7>;
 		touchscreen-fuzz-pressure = <2>;
@@ -363,7 +359,7 @@
 		ti,x-plate-ohms = <280>;
 		ti,esd-recovery-timeout-ms = <6000>;
 	};
-	
+
 	isl1208: isl1208@6f {
 		compatible = "intersil,isl1208";
 		reg = <0x6f>;
@@ -838,7 +834,7 @@
 
 		pinctrl_epdc_elan_touch: epdc_elan_touch_grp {
 			fsl,pins = <
-
+				MX7D_PAD_SAI1_RX_DATA__GPIO6_IO12 0x59
 				MX7D_PAD_SAI1_TX_DATA__GPIO6_IO15 0x1b
 				MX7D_PAD_SAI1_TX_BCLK__GPIO6_IO13 0x80000000
 			>;
@@ -966,12 +962,13 @@
 				MX7D_PAD_I2C1_SCL__I2C1_SCL		0x4000007f
 			>;
 		};
-
+		
 		pinctrl_i2c1_tsc2004: i2c1tsc2004grp {
 			fsl,pins = <
 			MX7D_PAD_EPDC_PWR_COM__GPIO2_IO30	0x7d
 		>;
 		};
+
 
 		pinctrl_i2c2: i2c2grp {
 			fsl,pins = <
